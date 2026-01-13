@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"week2/models"
+	models "week2/Models"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,14 +13,14 @@ var songs = []models.Song{
 	{
 		ID:       1,
 		Title:    "Laskar Pelangi",
-		Artist:   "Nidji",
+		ArtistID: 0,
 		FilePath: "storage/songs/laskar_pelangi.mp3",
 		Cover:    "storage/covers/laskar.jpg",
 	},
 	{
 		ID:       2,
 		Title:    "Separuh Aku",
-		Artist:   "NOAH",
+		ArtistID: 0,
 		FilePath: "storage/songs/separuh_aku.mp3",
 		Cover:    "storage/covers/noah.jpg",
 	},
@@ -33,7 +33,7 @@ func GetSongs(c *gin.Context) {
 
 func UploadSong(c *gin.Context) {
 	title := c.PostForm("title")
-	artist := c.PostForm("artist")
+	artistID, _ := strconv.Atoi(c.PostForm("artist_id"))
 
 	// ===== Upload SONG =====
 	songFile, err := c.FormFile("song")
@@ -58,7 +58,7 @@ func UploadSong(c *gin.Context) {
 	song := models.Song{
 		ID:       songID,
 		Title:    title,
-		Artist:   artist,
+		ArtistID: artistID,
 		FilePath: songPath,
 		Cover:    coverPath,
 	}

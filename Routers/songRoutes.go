@@ -13,5 +13,7 @@ func RegisterRoutes(r *gin.Engine) {
 		api.POST("/songs", controllers.UploadSong)
 		api.GET("/songs/:id/stream", controllers.StreamSong)
 		api.GET("/songs/:id/cover", controllers.CoverSong)
+
+		api.GET("/artists", controllers.GetArtists)
 	}
 }
